@@ -4,7 +4,7 @@
         "project_id": 254,
         "server_url": "https://etc-europa.shotgrid.autodesk.com",
         "client_id": "pub_api_admin",
-        "client_secret": "SECRET GOES HERE",
+        "client_secret": "bovryp1Rcbcslwfo_memengpi",
         "version_convention": {
             "Blender Renders": "{SHOT_CODE}_BRN_v{VERSION_NUMBER}",
             "Camera Animation": "{SHOT_CODE}_CAM_v{VERSION_NUMBER}",
@@ -34,7 +34,7 @@
                 "version_dir": "BRN_v{VERSION_NUMBER}",
                 "image": "{SHOT_CODE}_BRN_v{VERSION_NUMBER}_{FRAME_NUMBER}",
                 "movie": "{SHOT_CODE}_BRN_v{VERSION_NUMBER}",
-                "image_ext": ["exr"],
+                "image_ext": ["exr", "png", "tiff", "dpx", "jpg"],
                 "movie_ext": ["mov", "mp4"],
                 "original": "image",
                 "proxy": "movie"
@@ -44,7 +44,7 @@
                 "version_dir": "CAM_v{VERSION_NUMBER}",
                 "image": "{SHOT_CODE}_CAM_v{VERSION_NUMBER}_{FRAME_NUMBER}",
                 "movie": "{SHOT_CODE}_CAM_v{VERSION_NUMBER}",
-                "image_ext": ["exr"],
+                "image_ext": ["exr", "png", "tiff", "dpx", "jpg"],
                 "movie_ext": ["mov", "mp4"],
                 "original": "image",
                 "proxy": "movie"
@@ -54,7 +54,7 @@
                 "version_dir": "TRK_v{VERSION_NUMBER}",
                 "image": "{SHOT_CODE}_TRK_v{VERSION_NUMBER}_{FRAME_NUMBER}",
                 "movie": "{SHOT_CODE}_TRK_v{VERSION_NUMBER}",
-                "image_ext": ["exr"],
+                "image_ext": ["exr", "png", "tiff", "dpx", "jpg"],
                 "movie_ext": ["mov", "mp4"],
                 "original": "image",
                 "proxy": "movie"
@@ -64,7 +64,7 @@
                 "version_dir": "CGR_v{VERSION_NUMBER}",
                 "image": "{SHOT_CODE}_CGR_v{VERSION_NUMBER}_{FRAME_NUMBER}",
                 "movie": "{SHOT_CODE}_CGR_v{VERSION_NUMBER}",
-                "image_ext": ["exr"],
+                "image_ext": ["exr", "png", "tiff", "dpx", "jpg"],
                 "movie_ext": ["mov", "mp4"],
                 "original": "image",
                 "proxy": "movie"
@@ -74,7 +74,7 @@
                 "version_dir": "CMP_v{VERSION_NUMBER}",
                 "image": "{SHOT_CODE}_CMP_v{VERSION_NUMBER}_{FRAME_NUMBER}",
                 "movie": "{SHOT_CODE}_CMP_v{VERSION_NUMBER}",
-                "image_ext": ["exr"],
+                "image_ext": ["exr", "png", "tiff", "dpx", "jpg"],
                 "movie_ext": ["mov", "mp4"],
                 "original": "image",
                 "proxy": "movie"
@@ -84,7 +84,7 @@
                 "version_dir": "BRF_v{VERSION_NUMBER}",
                 "image": "{SHOT_CODE}_BRF_v{VERSION_NUMBER}_{FRAME_NUMBER}",
                 "movie": "{SHOT_CODE}_BRF_v{VERSION_NUMBER}",
-                "image_ext": ["exr"],
+                "image_ext": ["exr", "png", "tiff", "dpx", "jpg"],
                 "movie_ext": ["mov", "mp4"],
                 "original": "image",
                 "proxy": "movie"
@@ -110,18 +110,20 @@
                 "version_dir": "SLP_v{VERSION_NUMBER}",
                 "image": "{SHOT_CODE}_SLP_v{VERSION_NUMBER}_{FRAME_NUMBER}",
                 "movie": "{SHOT_CODE}_SLP_v{VERSION_NUMBER}",
-                "image_ext": ["exr"],
+                "image_ext": ["exr", "png", "tiff", "dpx", "jpg"],
                 "movie_ext": ["mov", "mp4"],
                 "original": "image",
                 "proxy": "movie"
             },
             "Upres": {
                 "parent_dir": ["UpRes"],
-                "version_dir": "_v{VERSION_NUMBER}",
+                "version_dir": "UPR_v{VERSION_NUMBER}",
                 "image": "{SHOT_CODE}_UPR_v{VERSION_NUMBER}_{FRAME_NUMBER}",
-                "image_ext": ["tiff"],
+                "movie": "{SHOT_CODE}_UPR_v{VERSION_NUMBER}",
+                "image_ext": ["exr", "png", "tiff", "dpx", "jpg"],
+                "movie_ext": ["mov", "mp4"],
                 "original": "image",
-                "proxy": null
+                "proxy": "movie"
             }
         }
     }
