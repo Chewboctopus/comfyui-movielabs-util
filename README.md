@@ -1,7 +1,7 @@
 # MovieLabs ComfyUI Nodes for Publishing Workflow
 
 
-***UPDATES:  YOu can now submit any image sequence, not just EXR.  Also added an option to automatically generate h264 MP4
+***UPDATES:  You can now submit any image format sequence, not just EXR.  Also added an option to automatically generate h264 MP4
 
 This project implements two custom nodes for the ComfyUI to enable the publishing of assets to the filesystem and ShotGrid:
 
@@ -80,4 +80,5 @@ The node will publish the blender file to the file system, after performing a va
 #### Naming Conventions
 
 The naming conventions are defined in the `config.json` file.
+
 
