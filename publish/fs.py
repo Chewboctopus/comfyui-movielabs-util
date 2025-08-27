@@ -29,8 +29,10 @@ def list_sequence_files(dir_path, extension):
 
 def get_frame_number_from_filename(file_path):
     base, _ = os.path.splitext(os.path.basename(file_path))
-    # This regex is more robust and finds numbers at the end of the filename
-    match = re.search(r'(\d+)$', base)
+    # --- MODIFIED REGEX ---
+    # This regex is more robust. It finds numbers at the end of the filename,
+    # even if they are followed by an optional underscore or period.
+    match = re.search(r'(\d+)[._]?$', base)
     if match:
         return match.group(1)
     raise ValueError(f"Could not extract frame number from {file_path}")
@@ -153,8 +155,23 @@ def create_task_version(shot_code, task_name, original_file_path, proxy_file_pat
     if not original_file_path or not (os.path.exists(original_file_path) or os.path.isdir(os.path.dirname(original_file_path))):
         raise FileNotFoundError(f"Original file or folder not found: {original_file_path}")
 
-    # A submission is a sequence if the path is a directory OR it's a file with frame numbers
-    is_sequence_submission = os.path.isdir(original_file_path) or re.search(r'\d+', os.path.splitext(os.path.basename(original_file_path))[0])
+    # --- START OF FIX ---
+    # Check the task's configuration to see if it's meant to be a sequence.
+    task_config = filesystem_config["version_convention"][task_name]
+    original_type = task_config.get("original") # e.g., "image" or "movie"
+    
+    # A task is sequential only if its filename format includes a frame number placeholder.
+    is_sequence_task = False
+    if original_type and f"{original_type}" in task_config:
+        if "{FRAME_NUMBER}" in task_config[f"{original_type}"]:
+            is_sequence_task = True
+
+    # A submission is a sequence if the task is a sequence task AND
+    # the path is a directory OR it's a file with frame numbers.
+    is_sequence_submission = is_sequence_task and \
+        (os.path.isdir(original_file_path) or \
+         re.search(r'\d+', os.path.splitext(os.path.basename(original_file_path))[0]))
+    # --- END OF FIX ---
     
     if not is_sequence_submission:
         match_extension(task_name, True, original_file_path)
@@ -192,14 +209,14 @@ def create_task_version(shot_code, task_name, original_file_path, proxy_file_pat
             proxy_name = get_file_name("movie", shot_code, task_name, new_version_number) + ".mp4"
             proxy_output_path = os.path.join(version_dir, proxy_name)
             
+            # This updated command correctly converts linear EXR files to Rec. 709
             cmd = [
                 "ffmpeg", "-y",
                 "-framerate", "24",
                 "-start_number", str(start_frame),
                 "-i", input_path_pattern,
-                "-vf", "scale=1920:1080",
+                "-vf", "zscale=t=linear,tonemap=hable,zscale=p=bt709,zscale=t=bt709,zscale=m=bt709,format=yuv420p,scale=1920:1080",
                 "-c:v", "libx264",
-                "-pix_fmt", "yuv420p",
                 proxy_output_path
             ]
             
